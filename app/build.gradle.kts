@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
@@ -47,6 +49,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:database"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:network"))
+    implementation(project(":feature:arrivals"))
+    implementation(project(":feature:bookmarks"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:setting"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,4 +73,13 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.timber)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }

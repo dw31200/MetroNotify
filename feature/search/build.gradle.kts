@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
@@ -30,10 +32,21 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:domain"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.timber)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }
